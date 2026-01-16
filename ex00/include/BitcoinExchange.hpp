@@ -5,6 +5,11 @@
 #ifndef CPP_MODULE_09_BITCOINEXCHANGE_HPP
 #define CPP_MODULE_09_BITCOINEXCHANGE_HPP
 
+#define DATE_FORMAT "YYYY-MM-DD"
+#define MAX_VALUE 1000.0
+#define MIN_VALUE 0.0
+#define DATA_FILE "data.csv"
+
 #include <iostream>
 #include <map>
 #include <string>
@@ -17,15 +22,17 @@ class BitcoinExchange
 {
 	private:
         std::map<std::string, double> exchangeRates;
-        bool isValidDate(const std::string& date) const;
-        bool isLeapYear(int year) const;
-        bool isValidValue(const std::string& valueStr, double& value) const;
+
 	public:
-		BitcoinExchange();
+        BitcoinExchange();
         ~BitcoinExchange();
 		BitcoinExchange(const BitcoinExchange& other);
-        BitcoinExchange& operator=(const BitcoinExchange& other);
+        BitcoinExchange&	operator=(const BitcoinExchange& other);
 
+        void				loadData(const std::string& filename);
+        double				getExchangeRate(const std::string& date) const;
+        static bool			isValidDate(const std::string& date);
+        static bool			isValidValue(const std::string& valueStr, double& value);
 
 };
 

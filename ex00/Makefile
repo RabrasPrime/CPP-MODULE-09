@@ -29,6 +29,7 @@ DEPS_BONUS        =   $(patsubst %.cpp, $(BUILD_DIR)%.d, $(SRC_BONUS))
 #=-=-=-=-=-=-ROOT-=-=-=-=-=#
 
 SRC =   main.cpp \
+		BitcoinExchange.cpp \
 
 #=-=-=-=-=-=-INCLUDES-=-=-=-=-=#
 

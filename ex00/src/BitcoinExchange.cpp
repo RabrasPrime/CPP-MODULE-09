@@ -6,7 +6,7 @@
 
 BitcoinExchange::BitcoinExchange()
 {
-    loadData("data.csv");
+    loadData(DATA_FILE);
 }
 
 BitcoinExchange::~BitcoinExchange() {}

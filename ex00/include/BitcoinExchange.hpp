@@ -23,7 +23,6 @@ class BitcoinExchange
 {
 	private:
         std::map<std::string, double> exchangeRates;
-		int	readFlag;
 	public:
         BitcoinExchange();
         ~BitcoinExchange();
@@ -33,7 +32,7 @@ class BitcoinExchange
         void				loadData(const std::string& filename);
         double				getExchangeRate(const std::string& date) const;
         static bool			isValidDate(const std::string& date);
-	static int				isValidValue(const std::string& valueStr, double& value);
+		static int			isValidValue(const std::string& valueStr, double& value);
 
 };
 

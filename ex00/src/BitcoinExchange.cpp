@@ -39,23 +39,36 @@ void	BitcoinExchange::loadData(const std::string& filename)
         if (firstLine)
         {
             firstLine = false;
+            if (line != "date,exchange_rate")
+                throw std::runtime_error("Invalid header in data file. Expected: date,exchange_rate");
             continue;
         }
+
         std::istringstream ss(line);
         std::string date;
         std::string rateStr;
 
-        if (std::getline(ss, date, ',') && std::getline(ss, rateStr))
-        {
-            date.erase(0, date.find_first_not_of(" \t"));
-            date.erase(date.find_last_not_of(" \t") + 1);
+        if (!std::getline(ss, date, ',') || !std::getline(ss, rateStr))
+            throw std::runtime_error("Invalid line format in data file.");
 
-            rateStr.erase(0, rateStr.find_first_not_of(" \t"));
-            rateStr.erase(rateStr.find_last_not_of(" \t") + 1);
+        date.erase(0, date.find_first_not_of(" \t"));
+        date.erase(date.find_last_not_of(" \t") + 1);
+        rateStr.erase(0, rateStr.find_first_not_of(" \t"));
+        rateStr.erase(rateStr.find_last_not_of(" \t") + 1);
 
-            double rate = std::atof(rateStr.c_str());
-            exchangeRates[date] = rate;
-        }
+        if (!isValidDate(date))
+            throw std::runtime_error("Invalid date format in data file: " + date);
+
+        char* end;
+        double rate = std::strtod(rateStr.c_str(), &end);
+
+        if (end == rateStr.c_str() || *end != '\0')
+            throw std::runtime_error("Invalid exchange rate in data file: " + rateStr);
+
+        if (rate < 0)
+            throw std::runtime_error("Negative exchange rate in data file: " + rateStr);
+
+        exchangeRates[date] = rate;
     }
     file.close();
 }

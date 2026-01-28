@@ -2,13 +2,14 @@
 // Created by tjooris on 1/28/26.
 //
 
-#ifndef CPP_MODULE_09_PMERGEME_HPP
-#define CPP_MODULE_09_PMERGEME_HPP
+#ifndef PMERGEME_HPP
+#define PMERGEME_HPP
 
-#include <iostream>
+typedef std::allocator<int> Allocator;
 
-
+template <template<typename, typename> class Container>
+void    mergeInsertSort(Container<int, Allocator>& cont);
 
 #include "PmergeMe.tpp"
 
-#endif //CPP_MODULE_09_PMERGEME_HPP
+#endif

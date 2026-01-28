@@ -83,7 +83,7 @@ int    main(int argc, char** argv)
             }
             else
             {
-                std::cout << "Error: bad input => " << line << std::endl;
+                std::cerr << "Error: bad input => " << line << std::endl;
             }
         }
 
@@ -91,7 +91,7 @@ int    main(int argc, char** argv)
     }
     catch (const std::exception& e)
     {
-        std::cout << "Error: " << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << std::endl;
         return 1;
     }
 

@@ -2,7 +2,14 @@
 // Created by tjooris on 1/28/26.
 //
 
-#ifndef CPP_MODULE_09_PMERGEME_TPP
-#define CPP_MODULE_09_PMERGEME_TPP
+#ifndef PMERGEME_TPP
+#define PMERGEME_TPP
 
-#endif //CPP_MODULE_09_PMERGEME_TPP
+#include <algorithm>
+#include "PmergeMe.hpp"
+
+template <template<typename, typename> class Container>
+void	mergeInsertSort(Container<int, Allocator>& cont)
+{
+}
+#endif

@@ -43,7 +43,7 @@ LIB         =   $(patsubst lib%.a, %, $(notdir $(LIB_PATH)))
 INC_DIR     =   include/
 INCLUDES    =   $(INC_DIR) \
                 $(addprefix $(dir $(LIB_PATH)), $(INC_DIR))\
-                $(dir $(LIB_PATH) /home/tjooris/.local/include/)
+                $(dir $(LIB_PATH) /sgoinfre/tjooris/.local/include/)
 
 #=-=-=-=-=-=-COMPIL-=-=-=-=-=#
 

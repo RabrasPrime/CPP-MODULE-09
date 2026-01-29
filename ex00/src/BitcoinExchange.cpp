@@ -25,7 +25,7 @@ BitcoinExchange&	BitcoinExchange::operator=(const BitcoinExchange& other)
     return *this;
 }
 
-void	BitcoinExchange::loadData(const std::string& filename)
+void    BitcoinExchange::loadData(const std::string& filename)
 {
     std::ifstream file(filename.c_str());
     if (!file.is_open())
@@ -68,7 +68,11 @@ void	BitcoinExchange::loadData(const std::string& filename)
         if (rate < 0)
             throw std::runtime_error("Negative exchange rate in data file: " + rateStr);
 
-        exchangeRates[date] = rate;
+        std::pair<std::map<std::string, double>::iterator, bool> result =
+            exchangeRates.insert(std::pair<std::string, double>(date, rate));
+
+        if (!result.second)
+            throw std::runtime_error("Duplicate date in data file: " + date);
     }
     file.close();
 }

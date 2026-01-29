@@ -6,13 +6,13 @@
 #include <iostream>
 #include <vector>
 #include <deque>
+#include <algorithm>  // Pour std::sort
 #include <limits>
 #include <cerrno>
 #include <sys/time.h>
 
 bool isValidNumber(const std::string& str, int& value)
 {
-
     if (str.empty())
         return false;
 
@@ -55,6 +55,7 @@ int main(int argc, char** argv)
     {
         std::vector<int, Allocator> vec;
         std::deque<int, Allocator> deq;
+        std::vector<int> vecStdSort;
 
         for (int i = 1; i < argc; ++i)
         {
@@ -66,6 +67,7 @@ int main(int argc, char** argv)
             }
             vec.push_back(value);
             deq.push_back(value);
+            vecStdSort.push_back(value);
         }
 
         std::cout << "Before: ";
@@ -76,6 +78,8 @@ int main(int argc, char** argv)
                 std::cout << " ";
         }
         std::cout << std::endl;
+
+        std::sort(vecStdSort.begin(), vecStdSort.end());
 
         double startVec = getTime();
         mergeInsertSort<std::vector>(vec);
@@ -121,6 +125,32 @@ int main(int argc, char** argv)
             std::cerr << "Error: vector and deque results differ!" << std::endl;
             return 1;
         }
+
+        bool correctSort = true;
+        for (size_t i = 0; i < vec.size(); ++i)
+        {
+            if (vec[i] != vecStdSort[i])
+            {
+                correctSort = false;
+                break;
+            }
+        }
+
+        if (!correctSort)
+        {
+            std::cerr << "Error: sort is incorrect compared to std::sort!" << std::endl;
+            std::cout << "Expected (std::sort): ";
+            for (size_t i = 0; i < vecStdSort.size(); ++i)
+            {
+                std::cout << vecStdSort[i];
+                if (i < vecStdSort.size() - 1)
+                    std::cout << " ";
+            }
+            std::cout << std::endl;
+            return 1;
+        }
+
+        std::cout << "Success: results are identical and correctly sorted." << std::endl;
     }
     catch (const std::exception& e)
     {

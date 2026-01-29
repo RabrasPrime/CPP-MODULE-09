@@ -50,7 +50,6 @@ int    main(int argc, char** argv)
                     std::cout << "Error: bad input => " << date << std::endl;
                     continue;
                 }
-
                 double value;
                 int validationResult = BitcoinExchange::isValidValue(valueStr, value);
 

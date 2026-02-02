@@ -8,7 +8,7 @@ int    main(int argc, char** argv)
 {
     if (argc != 2)
     {
-        std::out << "Error: could not open file." << std::endl;
+        std::cout << "Error: could not open file." << std::endl;
         return 1;
     }
 

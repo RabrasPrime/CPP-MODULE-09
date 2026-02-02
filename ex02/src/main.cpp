@@ -139,7 +139,7 @@ int main(int argc, char** argv)
         if (!correctSort)
         {
             std::cerr << "Error: sort is incorrect compared to std::sort!" << std::endl;
-            std::cout << "Expected (std::sort): ";
+            std::cerr << "Expected (std::sort): ";
             for (size_t i = 0; i < vecStdSort.size(); ++i)
             {
                 std::cout << vecStdSort[i];

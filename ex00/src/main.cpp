@@ -31,6 +31,8 @@ int    main(int argc, char** argv)
             if (firstLine)
             {
                 firstLine = false;
+				if (line != "date | value")
+					return std::cout << "Error: bad input => " << line << std::endl, 1;
                 continue;
             }
 
